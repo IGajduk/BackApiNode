@@ -1,30 +1,29 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+let ROLES = require('../config/roles');
 
 let UserSchema = new Schema({
     firstName:{
-        type: String,
-        required: true
+        type: String
     },
     surname:{
-        type: String,
-        required: true
+        type: String
+    },
+    password:{
+        type: String
     },
     phone:{
-        type: Number,
-        required: true
+        type: Number
     },
     email:{
-        type: String,
-        required: true
+        type: String
     },
     adress:{
-        type: String,
-        required: true
+        type: String
     },
-    admin:{
-        type: Boolean,
-        default: false
+    roles:{
+        type: Array,
+        default: [ROLES.GLOBAL_ROLES.USER_ROLE]
     }
 });
 

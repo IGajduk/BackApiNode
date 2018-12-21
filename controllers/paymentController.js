@@ -29,7 +29,7 @@ controller.create = async (req, res, next) => {
 };
 controller.update =async (req, res, next) => {
     try{
-        let payment = await Payment.findOneByIdAndUpdate(req.params.id, req.body, {new: true});
+        let payment = await Payment.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).json(payment);
     }catch (e) {
         next(new ControllerError(e.message, 400));

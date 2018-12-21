@@ -19,17 +19,17 @@ controller.getById = async (req, res, next) => {
         next(new ControllerError(e.message, 400));
     }
 };
-controller.create = async (req, res, next) => {
+controller.createUser = async (req, res, next) => {
     try{
         let user = await User.create(req.body);
-        res.status(201).json(user);
+        return res.status(201).json(user);
     }catch (e) {
         next(new ControllerError(e.message, 400));
     }
 };
-controller.update =async (req, res, next) => {
+controller.update = async (req, res, next) => {
     try{
-        let user = await User.findOneByIdAndUpdate(req.params.id, req.body, {new: true});
+        let user = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).json(user);
     }catch (e) {
         next(new ControllerError(e.message, 400));

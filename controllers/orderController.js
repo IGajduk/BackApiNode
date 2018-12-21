@@ -29,7 +29,7 @@ controller.create = async (req, res, next) => {
 };
 controller.update =async (req, res, next) => {
     try{
-        let order = await Order.findOneByIdAndUpdate(req.params.id, req.body, {new: true});
+        let order = await Order.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).json(order);
     }catch (e) {
         next(new ControllerError(e.message, 400));

@@ -7,14 +7,30 @@ let OrderRouter = require('./orderRouter');
 let PaymentRouter = require('./paymentRouter');
 let ProducerRouter = require('./producerRouter');
 let UserRouter = require('./userRouter');
+let ProductsByCategoryRouter = require('./productByCategoryRouter');
+let CommentsByProductRouter = require('./commentsByProductRouter');
+let LoginRouter = require('./loginRouter');
+let SigninRouter = require('./signinRouter');
+let RegistrationRouter = require('./registrationRouter');
+let LogoutRouter = require('./logoutRouter');
+let PassportMiddleware = require('../middleware/passport');
 
 router.use('/products', ProductRouter);
+router.use('/productsByCategory', ProductsByCategoryRouter);
+router.use('/commentsByProduct', CommentsByProductRouter);
 router.use('/categories', CategoryRouter);
 router.use('/comments', CommentRouter);
-router.use('/orders', OrderRouter);
-router.use('/payments', PaymentRouter);
+router.use('/orders', PassportMiddleware.isLoggedIn, OrderRouter);
+router.use('/payments', PassportMiddleware.isLoggedIn, PaymentRouter);
 router.use('/producers', ProducerRouter);
-router.use('/users', UserRouter);
+router.use('/users', PassportMiddleware.isLoggedIn, UserRouter);
+router.use('/login', LoginRouter);
+router.use('/sign', SigninRouter);
+router.use('/register', RegistrationRouter);
+router.use('/logout', LogoutRouter);
+
+
+
 
 
 module.exports = router;

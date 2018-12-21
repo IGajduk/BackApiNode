@@ -27,9 +27,9 @@ controller.create = async (req, res, next) => {
         next(new ControllerError(e.message, 400));
     }
 };
-controller.update =async (req, res, next) => {
+controller.update = async (req, res, next) => {
     try{
-        let product = await Product.findOneByIdAndUpdate(req.params.id, req.body, {new: true});
+        let product = await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).json(product);
     }catch (e) {
         next(new ControllerError(e.message, 400));

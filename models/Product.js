@@ -4,31 +4,25 @@ let Schema = mongoose.Schema;
 let ProductSchema = new Schema({
     title:{
         type: String,
-        required: true
+
     },
     price:{
         type: Number,
-        required: true
+
     },
-    about: {
-        all:{
+    about_all:{
+        type: String,
+
+    },
+    about_short:{
             type: String,
-            required: true
-        },
-        short:{
-            type: String,
-            required: true
-        }
+
     },
     colors: [],
     photos: [],
     quantity:{
         type: Number,
-        required: true
-    },
-    producent:{
-        type: Schema.ObjectId,
-        ref: 'Producent'
+
     },
     date:{
         type: Date,
@@ -36,7 +30,7 @@ let ProductSchema = new Schema({
     },
     gender:{
         type: String,
-        required: true
+
     },
     category:{
         type: Schema.ObjectId,
@@ -48,11 +42,11 @@ let ProductSchema = new Schema({
     },
     show:{
         type: Boolean,
-        required: true
+
     },
     sale:{
         type: Boolean,
-        required: true
+
     }
 });
 

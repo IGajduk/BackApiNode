@@ -16,10 +16,8 @@ let OrderSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
-    delivery: {
-        address: String,
-        phone: String
-    },
+    address: String,
+    phone: String,
     details: String,
     payment: {
         type: Schema.ObjectId,

@@ -14,7 +14,7 @@ let PaymentSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
-    sum: Number
+    sum: String
 });
 
 module.exports = mongoose.model('Payment', PaymentSchema);

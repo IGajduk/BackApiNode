@@ -1,14 +1,52 @@
 let express = require('express');
 let mongoose = require('mongoose');
+let cors = require('cors');
+let User = require('./models/User');
 let MainRouter = require('./routes/index');
+let morgan = require('morgan');
 let ControllerError = require('./errors/ControllerError');
+let session = require('express-session');
+require('./config/passport');
+let passport = require('passport');
+let cookieParser = require('cookie-parser');
 
 mongoose.connect('mongodb://localhost:27017/shopDB', {useNewUrlParser: true});
 
 let app = express();
 
+app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(morgan('dev'));
+
+app.use(cookieParser());
+app.use(session({
+    secret: 'asfknsdjkfsdbfj123',
+    resave: true,
+    saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//
+// app.get('/principal', (req, res) => {
+// //     console.log('/principal');
+// //     console.log(req.user);
+// //     res.json(req.user);
+// // });
+
+
+
+app.get('/', async (req, res, next) => {
+    console.log('/here');
+    res.redirect('/products');
+});
+
+
+
+
+
 
 app.use(MainRouter);
 
@@ -18,6 +56,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+    console.log(err);
     res.status(500).json({
         message: err.msg,
         status: err.status
@@ -25,5 +64,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3000, () => {
-   console.log('listening...!');aaa
+    console.log('listening...!');
 });
