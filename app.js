@@ -1,7 +1,7 @@
 let express = require('express');
 let mongoose = require('mongoose');
+
 let cors = require('cors');
-let User = require('./models/User');
 let MainRouter = require('./routes/index');
 let morgan = require('morgan');
 let ControllerError = require('./errors/ControllerError');
@@ -10,6 +10,9 @@ require('./config/passport');
 let passport = require('passport');
 let cookieParser = require('cookie-parser');
 
+
+
+
 mongoose.connect('mongodb://localhost:27017/shopDB', {useNewUrlParser: true});
 
 let app = express();
@@ -17,6 +20,7 @@ let app = express();
 app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static('./public'));
 app.use(morgan('dev'));
 
 app.use(cookieParser());
@@ -29,23 +33,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//
-// app.get('/principal', (req, res) => {
-// //     console.log('/principal');
-// //     console.log(req.user);
-// //     res.json(req.user);
-// // });
-
-
-
 app.get('/', async (req, res, next) => {
     console.log('/here');
     res.redirect('/products');
 });
-
-
-
-
 
 
 app.use(MainRouter);
