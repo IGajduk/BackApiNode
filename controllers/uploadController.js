@@ -8,7 +8,6 @@ let fs = require("fs");
 
 let controller = {};
 let productId = {};
-let photoName;
 
 function modifingName(name) {
     let originNameWithoutSpaces = name.split(' ').join('-');

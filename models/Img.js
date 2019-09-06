@@ -1,12 +1,9 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let ImageSchema = new Schema({
+let ImgSchema = new Schema({
     title: String,
-    product:{
-        type: Schema.ObjectId,
-        ref: 'Product'
-    },
+    refId: String,
     position: Number,
     urlOfImg: String,
     date:{
@@ -15,4 +12,4 @@ let ImageSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Image', ImageSchema);
+module.exports = mongoose.model('Img', ImgSchema);
